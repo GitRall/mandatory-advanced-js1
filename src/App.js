@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Login from './Login.js';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.state = {page: 'login', userName: ''}
+  }
+  onChangeUsername(e) {
+    this.setState({userName: e.target.value})
+    console.log(this.state);
+  }
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    const login = <Login onChangeUsername={this.onChangeUsername}/>
+    if(this.state.page === 'login'){
+      return (
+        <div className="App">
+          {login}
+        </div>
+      );
+    }
   }
 }
+
 
 export default App;

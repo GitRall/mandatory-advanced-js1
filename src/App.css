@@ -158,3 +158,9 @@ header{
   word-wrap: break-word;
   background: #f5f5f5;
 }
+.chat__message-link{
+  font-size: 2rem;
+}
+.chat__message-word{
+  font-size: 2rem;
+}

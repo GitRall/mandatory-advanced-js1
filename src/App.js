@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from './Login';
 import Chat from './Chat';
-// import io from 'socket.io-client';
-// const socket = io('http://ec2-13-53-66-202.eu-north-1.compute.amazonaws.com:3000');
-
 
 class App extends Component {
   constructor(props) {
@@ -13,18 +10,6 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onLogout = this.onLogout.bind(this);
     this.state = {page: 'login', username: ''};
-  }
-
-  componentDidMount() {
-    // socket.on('connect', function(){
-    //   console.log('connected');
-    // });
-    // socket.on('messages', function(data){
-    //   console.log(data);
-    // });
-    // socket.on('new_message', function(data){
-    //   console.log(data);
-    // });
   }
 
   onLogout(e) {

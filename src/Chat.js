@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import Message from './Message';
 import io from 'socket.io-client';
 
+function scrollBottom() {
+  let chatWindow = document.querySelector('.chat__chat-window');
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
 
 class Chat extends Component {
   constructor(props){
@@ -24,7 +28,14 @@ class Chat extends Component {
     this.socket.on('disconnect', function(){
       console.log('disconnected');
     })
-    this.socket.on('messages', this.handleData);
+    this.socket.on('messages', (data) => {
+      new Promise ((resolve, reject) => {
+        resolve(this.handleData(data))
+      })
+      .then(() => {
+        scrollBottom();
+      })
+    });
     this.socket.on('new_message', this.handleNewData);
   }
 
@@ -57,8 +68,7 @@ class Chat extends Component {
       .then(() => {
         let messageInput = document.querySelector('.chat__chat-input');
         messageInput.value = '';
-        let chatWindow = document.querySelector('.chat__chat-window');
-        chatWindow.scrollTop = chatWindow.scrollHeight;
+        scrollBottom();
       })
     }
   }

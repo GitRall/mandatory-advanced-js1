@@ -10,6 +10,7 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onLogout = this.onLogout.bind(this);
     this.state = {page: 'login', username: ''};
+    // this.regExLogin = /[\w\-_\s]*/;
   }
 
   onLogout(e) {

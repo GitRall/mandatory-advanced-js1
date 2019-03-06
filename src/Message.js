@@ -10,7 +10,9 @@ const emojiArray = [
   {str: ':joy:', icon: '😂'},
   {str: ':girl:', icon: '👧'},
   {str: ':boy:', icon: '👦'},
-  {str: ':beer:', icon: '🍺'}
+  {str: ':beer:', icon: '🍺'},
+  {str: ':older_man:', icon: '👴'},
+  {str: ':older_woman:', icon: '👵'}
 ]
 
 class Message extends React.Component {

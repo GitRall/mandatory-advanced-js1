@@ -23,14 +23,16 @@ class Message extends React.Component {
     this.regExEmoji = /:.[^\s:-]*:/g;
   }
   render() {
+    /* Map through every message and place in JSX format and then send it into array*/
     const messageArray = this.props.messages.map(message => {
       let messageTimeStamp = moment(message.timestamp).format('DD-MM-YYYY / LT');
-      let messageSplit = message.content.split(' ');
+      let messageSplit = message.content.split(/\s+/);
 
       let contentArray = [];
       for(let i = 0; i < messageSplit.length; i++){
         let key = `${message.id}#${i}`;
 
+        /* --- Checks for emojis --- */
         if(this.regExEmoji.test(messageSplit[i])){
 
           let foundEmojis = messageSplit[i].match(this.regExEmoji);
@@ -43,6 +45,7 @@ class Message extends React.Component {
           })
         }
 
+        /* --- Checks for urls --- */
         if(this.regExUrl.test(messageSplit[i])){
           if(!this.regExHttp.test(messageSplit[i])){
             messageSplit[i] = <a className='chat__message-link' key={key} href={'https://' + messageSplit[i]}>{messageSplit[i]} </a>
@@ -51,12 +54,14 @@ class Message extends React.Component {
             messageSplit[i] = <a className='chat__message-link' key={key} href={messageSplit[i]}>{messageSplit[i]} </a>
           }
         }
+        /* --- else it is a string --- */
         else {
           messageSplit[i] = <span className='chat__message-word' key={key}>{messageSplit[i]} </span>
         }
         contentArray.push(messageSplit[i]);
 
       }
+      /* Returns message as JSX to array */
       return (
         <div className='chat__message-wrapper' key={message.id}>
           <h4 className='chat__user'>{message.username}</h4>

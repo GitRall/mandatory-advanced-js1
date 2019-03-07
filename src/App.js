@@ -10,6 +10,7 @@ class App extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.hidePopupHelper = this.hidePopupHelper.bind(this);
     this.state = {page: 'login', username: '', popuphelper: false};
     this.regExLogin = /^[a-zåäöA-ZÅÄÖ\d-_\s]*$/;
   }
@@ -19,9 +20,11 @@ class App extends Component {
   }
 
   onChangeUsername(e) {
-    this.setState({username: e.target.value});
+    this.setState({username: e.target.value, popuphelper: false});
   }
-
+  hidePopupHelper(e) {
+    this.setState({popuphelper: false})
+  }
   onSubmit() {
     if(this.state.username.length < 1 || this.state.username.length > 12 || !this.regExLogin.test(this.state.username)){
       this.setState({popuphelper: true})
@@ -36,7 +39,7 @@ class App extends Component {
     const chat = <Chat username={this.state.username} onClick={this.onLogout}></Chat>;
     if(this.state.page === 'login'){
       return (
-        <div className="App">
+        <div className="App" onClick={this.hidePopupHelper}>
           { login }
         </div>
       );

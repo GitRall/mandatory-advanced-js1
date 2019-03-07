@@ -9,11 +9,11 @@ class Login extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.props);
     this.props.onSubmit();
-    console.log(this.props)
   }
   render() {
+    const popupHelperText = <p className='popup-helper__text'>Must contain between <br/> 1 - 12 characters.<br/>May contain Alphanumeric characters - _ and spaces</p>;
+
     if(!this.props.popuphelper){
       return (
         <div className='login__form-container'>
@@ -32,7 +32,7 @@ class Login extends React.Component {
           <form className='login__form' onSubmit={this.onSubmit}>
             <input className='login__user-input' onChange={this.props.onChangeUsername} type='text'/>
             <button className='login__submit-btn'>Login</button>
-            <Popuphelper></Popuphelper>
+            <Popuphelper text={popupHelperText}></Popuphelper>
           </form>
         </div>
       )
